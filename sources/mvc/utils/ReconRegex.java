@@ -29,9 +29,13 @@ public class ReconRegex {
             else{
                 result.set(position, "("+result.get(position)+")+") ;
                 result.remove(position+1);
-            } 
-        }else if( result.get(position).matches("\\("+result.get(position)+"\\)\\+") )
+            }
+           return true ; 
+        }else if( result.get(position).matches("\\("+result.get(position)+"\\)\\+") ){
             result.remove(position+1) ;
+            return true ;
+        }
+        return false ;
     }
 
     private static void reduce(ArrayList<String> result, int start, int size){
