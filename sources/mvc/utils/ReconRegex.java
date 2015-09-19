@@ -23,7 +23,15 @@ public class ReconRegex {
 
     private static boolean eat(ArrayList<String> result, int size, int position){
         this.reduce(result,position+1,size) ;
-        if( result.get(position).matches( result.get(position+1) ) )
+        if( result.get(position).matches( "^"+result.get(position+1)+"$" ) ){
+            if( result.get(position+1).matches( "\\(.*\\)\\+" ) )
+                result.remove(position+1) ;
+            else{
+                result.set(position, "("+result.get(position)+")+") ;
+                result.remove(position+1);
+            } 
+        }else if( result.get(position).matches("\\("+result.get(position)+"\\)\\+") )
+            result.remove(position+1) ;
     }
 
     private static void reduce(ArrayList<String> result, int start, int size){
@@ -52,7 +60,7 @@ public class ReconRegex {
         if( result.get(pos1).matches( "^"+result.get(pos2)+"$" ) ){
             result.set( pos1, result.get(pos1)+"+" ) ;
             result.remove( pos2 ) ;
-        }else if( result.get(pos1).matches( "^("+result.get(pos2)+")+$") )
+        }else if( result.get(pos1).matches( "^\\("+result.get(pos2)+"\\)\\+$") )
             result.remove( pos2 ) ; 
     }
 
