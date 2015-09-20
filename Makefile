@@ -1,0 +1,13 @@
+all: compil
+
+bin:
+	mkdir $@
+
+compil: bin
+	javac sources/mvc/controller/utils/*.java sources/mvc/controller/minions/*.java sources/mvc/controller/*.java sources/services/*.java sources/tests/*.java  -d bin
+
+tests:
+	cd bin ; java tests/TestReconRegex ;
+	
+clean:
+	rm -r bin ;
