@@ -6,15 +6,20 @@ import java.util.ArrayList ;
 import java.io.FileNotFoundException;
 import java.lang.NullPointerException;
 
+import mvc.model.Model ;
 import services.ControllerServices ;
 import mvc.controller.minions.MinionTagger;
 
 public class Controller implements ControllerServices{
 
+    private HashMap<String, ArrayList<FileToTreat>> toTreats ;
     private ArrayList<Thread> minions ;
+    private Model model ;
 
     public Controller(){
+        this.toTreats = new HashMap<String, ArrayList<FileToTreat>>() ;
         this.minions = new ArrayList<Thread>() ;
+        this.model = new Model() ;
     }
 
     @Override
@@ -34,7 +39,7 @@ public class Controller implements ControllerServices{
     }
 
     private void tagThis(File file){
-        this.minions.add( new MinionTagger(file) ) ;
+        this.minions.add( new MinionTagger(file,this.model,this.toTreats) ) ;
     }
 
     private void reconThat(File file){
