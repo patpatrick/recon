@@ -10,8 +10,9 @@ public class TestReconRegex {
 
         for( String filename : reg ){
             String regex = ReconRegex.reconRegex(filename) ;
-            if( filename.matches(regex) ) System.out.println(filename+" matches");
-            else System.out.println(filename+" not matches");
+            if( filename.matches(regex) ) 
+                System.out.println(filename+"\n"+regex+"\nMATCHES\n");
+            else System.out.println(filename+" not matches:\n\t"+regex+"\nNOT MATCHES\n");
         }
 
     }

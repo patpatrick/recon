@@ -19,12 +19,12 @@ public class ReconRegex {
 
     private static boolean eat(ArrayList<String> result,int position,int size){
         if( position > result.size()-2 ) return false ;
-        if( result.get(position).matches("^"+result.get(position+1)+"$") ){
-            if( result.get(position).matches("\\("+result.get(position+1)+"\\)\\+") == false )
+        if( result.get(position).equals(result.get(position+1)) ){
+            if( result.get(position).equals("("+result.get(position+1)+")+") == false )
                 result.set(position,"("+result.get(position)+")+") ;
             result.remove(position+1);
             return true ;
-        }else if( result.get(position).matches("\\("+result.get(position+1)+"\\)\\+") ){
+        }else if( result.get(position).matches("("+result.get(position+1)+")+") ){
             result.remove( position+1 );
             return true ;
         }
@@ -76,11 +76,12 @@ public class ReconRegex {
 
         if( pos1 < 0 || pos2 < 0 ) return ;
 
-        if( result.get(pos1).matches( "^"+result.get(pos2)+"$" ) ){
-            result.set( pos1, result.get(pos1)+"+" ) ;
+        if( result.get(pos1).equals( result.get(pos2)+"+") )
             result.remove( pos2 ) ;
-        }else if( result.get(pos1).matches( "^\\("+result.get(pos2)+"\\)\\+$") )
-            result.remove( pos2 ) ; 
+        else if( result.get(pos1).equals( result.get(pos2) ) ){
+            result.set( pos1, result.get(pos1)+"+" ) ;
+                result.remove( pos2 ) ;
+        }
     }
 
     public static String reconRegex(String filename){
