@@ -3,7 +3,7 @@ package mvc.controller.minions ;
 import java.io.File ;
 import java.lang.Thread ;
 
-import mvc.utils.RegexRecon ;
+import mvc.controller.utils.ReconRegex ;
 
 public class MinionTagger extends Thread {
 

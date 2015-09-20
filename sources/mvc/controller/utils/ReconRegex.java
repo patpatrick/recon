@@ -1,12 +1,12 @@
 package mvc.controller.utils ;
 
-import java.utils.ArrayList ;
+import java.util.ArrayList ;
 
 public class ReconRegex {
 
     private static void sizedMelt(ArrayList<String> result,int position,int size){
         int cpt = 0 ;
-        while(cpt < size && this.melt(result,position)) 
+        while(cpt < size && melt(result,position)) 
             cpt++;
     }
 
@@ -18,7 +18,7 @@ public class ReconRegex {
     }
 
     private static boolean eat(ArrayList<String> result,int position,int size){
-        if( postion > result.size()-2 ) return false ;
+        if( position > result.size()-2 ) return false ;
         if( result.get(position).matches("^"+result.get(position+1)+"$") ){
             if( result.get(position).matches("\\("+result.get(position+1)+"\\)\\+") == false )
                 result.set(position,"("+result.get(position)+")+") ;
@@ -33,12 +33,12 @@ public class ReconRegex {
 
     private static int eatMore(ArrayList<String> result, int position, int size){
         if( position > result.size()-1 ) return 0 ;
-        this.sizedMelt(result,position+1,size) ;
+        sizedMelt(result,position+1,size) ;
 
         int cpt = 0 ;
         while( eat(result,position,size) ){
             cpt++ ;
-            this.sizedMelt(result,position+1,size) ;
+            sizedMelt(result,position+1,size) ;
         }
 
         return cpt ; 
@@ -48,9 +48,9 @@ public class ReconRegex {
         int size = 0, position = 0 ;
         while(result.size()>1){
             position = 0 ;
-            this.sizedMelt(result,position,size);
+            sizedMelt(result,position,size);
             while(position < result.size() ){
-                this.eatMore(result,position,size) ;
+                eatMore(result,position,size) ;
                 position++ ;
             }
             size++;
@@ -71,8 +71,10 @@ public class ReconRegex {
     }
 
     private static void simpleReduce(ArrayList<String> result){
-        int pos1 = result.size()-1 ;
-        int pos2 = result.size() - 2 ;
+        int pos1 = result.size()-2 ;
+        int pos2 = result.size()-1 ;
+
+        if( pos1 < 0 || pos2 < 0 ) return ;
 
         if( result.get(pos1).matches( "^"+result.get(pos2)+"$" ) ){
             result.set( pos1, result.get(pos1)+"+" ) ;
@@ -82,16 +84,16 @@ public class ReconRegex {
     }
 
     public static String reconRegex(String filename){
-        ArrayList<String> result = this.simpleRecon(filename);
-        this.reduce(result); 
+        ArrayList<String> result = simpleRecon(filename);
+        return reduce(result); 
     }
 
     private static ArrayList<String> simpleRecon(String filename){
         String[] buffer = filename.split("") ;
         ArrayList<String> result = new ArrayList<String>() ;
         for( String c : buffer ){
-            result.add( this.reconChar( c ) ) ;
-            this.simpleReduce(result) ;
+            result.add( reconChar( c ) ) ;
+            simpleReduce(result) ;
         }
         return result ;
     }

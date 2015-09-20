@@ -2,11 +2,12 @@ package mvc.controller ;
 
 import java.io.File ;
 import java.lang.Thread ;
-import java.utils.ArrayList ;
+import java.util.ArrayList ;
 import java.io.FileNotFoundException;
 import java.lang.NullPointerException;
 
 import services.ControllerServices ;
+import mvc.controller.minions.MinionTagger;
 
 public class Controller implements ControllerServices{
 
@@ -17,8 +18,8 @@ public class Controller implements ControllerServices{
     }
 
     @Override
-    public void searchTagRecon(String path)throws NullPointerException, FileNotFound Exception {
-        if( path == null || path.mathes("^\\s*$") ) 
+    public void searchTagRecon(String path)throws NullPointerException, FileNotFoundException {
+        if( path == null || path.matches("^\\s*$") ) 
             throw new NullPointerException("[:(][searchTagRecon] The path to recon is empty![):]") ;
 
         File file = new File(path) ;
@@ -41,7 +42,7 @@ public class Controller implements ControllerServices{
             if( content.isFile() )
                 this.tagThis(file);
             else if( content.isDirectory() && content.getName().equals(".") == false && content.getName().equals("..") )
-                this.reconThis(content);
+                this.reconThat(content);
         }
     }
 
