@@ -1,4 +1,4 @@
-package mvc.minions ;
+package mvc.controller.minions ;
 
 import java.io.File ;
 import java.lang.Thread ;
