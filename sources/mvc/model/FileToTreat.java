@@ -7,7 +7,7 @@ public class FileToTreat{
     private File file ;
     private String extention ;
 
-    public FileToRead(String extention, File file){
+    public FileToTreat(String extention, File file){
         this.file = file ;
         this.extention = extention ;
     }

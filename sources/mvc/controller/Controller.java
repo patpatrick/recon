@@ -2,11 +2,13 @@ package mvc.controller ;
 
 import java.io.File ;
 import java.lang.Thread ;
+import java.util.HashMap ;
 import java.util.ArrayList ;
 import java.io.FileNotFoundException;
 import java.lang.NullPointerException;
 
 import mvc.model.Model ;
+import mvc.model.FileToTreat ;
 import services.ControllerServices ;
 import mvc.controller.minions.MinionTagger;
 

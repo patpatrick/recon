@@ -6,7 +6,7 @@ import services.ModelServices ;
 
 public class Model implements ModelServices {
 
-    private Hashmap<String,Routine> routines ;
+    private HashMap<String,Routine> routines ;
 
     @Override
     public Routine getRoutine(String regex){

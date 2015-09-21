@@ -2,8 +2,13 @@ package mvc.controller.minions ;
 
 import java.io.File ;
 import java.lang.Thread ;
+import java.util.HashMap;
+import java.util.ArrayList ;
 
 import mvc.controller.utils.ReconRegex ;
+import mvc.model.FileToTreat;
+import mvc.model.Routine ;
+import mvc.model.Model ;
 
 public class MinionTagger extends Thread {
 
@@ -21,15 +26,16 @@ public class MinionTagger extends Thread {
     @Override
     public void run(){
         String regex = ReconRegex.reconRegex(this.toTreat.getName());
+        Routine routine = null ;
         synchronized( this.model ){
-            Routine routine = this.model.getRoutines(regex);
+            routine = this.model.getRoutine(regex);
         }
-        FileToTreat ftt = new FileToTreat( this.toTreat.getName().replaceAll(".*\\.(.*)$","$1"), this.file ) ;
+        FileToTreat ftt = new FileToTreat( this.toTreat.getName().replaceAll(".*\\.(.*)$","$1"), this.toTreat ) ;
         if( routine == null ){
              ArrayList<FileToTreat> list;
             synchronized( this.listToTreat ){
                 list = this.listToTreat.get(regex) ;
-                if( list = null ){
+                if( list == null ){
                     list = new ArrayList<FileToTreat>();
                     this.listToTreat.put(regex,list);
                 }
