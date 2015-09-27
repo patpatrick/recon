@@ -12,7 +12,7 @@ public class MinionWaiter implements Runnable {
         this.run() ;
     }
 
-    public ArrayList<Runnable> getWainting(){
+    public ArrayList<Runnable> getWaiting(){
         return this.waiting;
     }
 

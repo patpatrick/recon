@@ -28,7 +28,7 @@ public class Controller implements ControllerServices{
     }
 
     private void reconFile(File toRecon){
-        this.threadWaiter.addMinion( new MinionRecon(this.threadWaiter,toRecon) );
+        this.threadWaiter.addMinion( new MinionRecon(this.threadWaiter.getWaiting(),toRecon) );
     }
 
     private void reconFolder(File toRecon){

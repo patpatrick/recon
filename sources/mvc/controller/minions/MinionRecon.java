@@ -4,6 +4,8 @@ import java.io.File;
 import java.lang.Runnable;
 import java.lang.ArrayList;
 
+import utils.ReconRegex;
+
 public class MinionRecon implements Runnable{
 
     private ArrayList<Runnable> waiting;
@@ -16,7 +18,7 @@ public class MinionRecon implements Runnable{
 
     @Override
     public void run(){
-        String regex = ReconRegex.recon( file.getName() ) ;
+        String regex = ReconRegex.recon( file.getName() );
     }
 
 } 
