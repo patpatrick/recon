@@ -34,3 +34,5 @@ Session.vim
 .netrwhist
 *~
 
+#folder to avoid
+bin
