@@ -1,22 +1,22 @@
 package mvc.controller.minions;
 
-import java.lang.Runnable;
+import java.lang.Thread;
 import java.util.ArrayList;
 
-public class MinionWaiter implements Runnable {
+public class MinionWaiter extends Thread {
 
-    private ArrayList<Runnable> waiting;
+    private ArrayList<Thread> waiting;
 
     public void MinionWaiter(){
         this.waiting = new ArrayList<Thread>();
         this.run() ;
     }
 
-    public ArrayList<Runnable> getWaiting(){
+    public ArrayList<Thread> getWaiting(){
         return this.waiting;
     }
 
-    public void addMinion(Runnable minion){
+    public void addMinion(Thread minion){
         synchronized(this.waiting){
             this.waiting.add(minion);
         }

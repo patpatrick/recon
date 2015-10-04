@@ -1,17 +1,17 @@
 package mvc.controller.minions;
 
 import java.io.File;
-import java.lang.Runnable;
-import java.lang.ArrayList;
+import java.lang.Thread;
+import java.util.ArrayList;
 
 import utils.ReconRegex;
 
-public class MinionRecon implements Runnable{
+public class MinionRecon extends Thread{
 
-    private ArrayList<Runnable> waiting;
+    private ArrayList<Thread> waiting;
     private File file;
 
-    public MinionRecon(ArrayList<Runnable> waiting, File file){
+    public MinionRecon(ArrayList<Thread> waiting, File file){
         this.wainting = waiting;
         this.file = file;
     }

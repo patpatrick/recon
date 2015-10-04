@@ -3,8 +3,8 @@ package mvc.controller;
 import java.io.File;
 import java.io.IOException;
 
-import mvc.services.minions.MinionWaiter;
-import mvc.services.minions.MinionRecon;
+import mvc.controller.minions.MinionWaiter;
+import mvc.controller.minions.MinionRecon;
 
 import services.ControllerServices;
 
@@ -24,7 +24,7 @@ public class Controller implements ControllerServices{
         File toRecon = new File(path);
 
         if( toRecon.isFile() ) this.reconFile(toRecon);
-        else if( toRecon.isDirecory() ) this.reconFolder(toRecon);
+        else if( toRecon.isDirectory() ) this.reconFolder(toRecon);
     }
 
     private void reconFile(File toRecon){
@@ -32,7 +32,7 @@ public class Controller implements ControllerServices{
     }
 
     private void reconFolder(File toRecon){
-        for(File content : toRecon.listFile() ){
+        for(File content : toRecon.listFiles() ){
             if( content.isFile() ) this.reconFile(content);
             else if( content.isDirectory() ) this.reconFolder(content);
         }

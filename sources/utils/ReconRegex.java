@@ -60,7 +60,7 @@ public class ReconRegex{
     /*
      * Method that melt size character(s) from the start.  
      */
-    private static void melt(ArrayList<Strin> toRecon, int size, int start){
+    private static void melt(ArrayList<String> toRecon, int size, int start){
         int cpt = 0 ;
         while( cpt < size && this.melting(toRecon,start) )
             cpt++ ;
