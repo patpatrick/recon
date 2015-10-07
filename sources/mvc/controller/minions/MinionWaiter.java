@@ -2,6 +2,7 @@ package mvc.controller.minions;
 
 import java.lang.Thread;
 import java.util.ArrayList;
+import java.lang.InterruptedException;
 
 public class MinionWaiter extends Thread {
 
@@ -25,10 +26,15 @@ public class MinionWaiter extends Thread {
     @Override
     public void run(){
         while( true ){
-            this.waiting.wait();
+            try{
+                this.waiting.wait();
+            }catch(InterruptedException e){}
             synchronized( this.waiting ){
-                while( this.waiting.size() > 0 )
-                    this.waiting.remove(0).join();
+                while( this.waiting.size() > 0 ){
+                    try{
+                        this.waiting.remove(0).join();
+                    }catch(InterruptedException e){}
+                }
             }
         } 
     }

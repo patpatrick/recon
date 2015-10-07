@@ -12,7 +12,7 @@ public class MinionRecon extends Thread{
     private File file;
 
     public MinionRecon(ArrayList<Thread> waiting, File file){
-        this.wainting = waiting;
+        this.waiting = waiting;
         this.file = file;
     }
 

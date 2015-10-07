@@ -8,8 +8,8 @@ public class ReconRegex{
      * Method that generate the most minimum regular expresssion of the String put in parameter.
      */
     public static String recon(String filename){
-        ArrayList<String> simple = this.simpleRecon(filename);
-        return this.reduce( simple ).get(0) ; 
+        ArrayList<String> simple = simpleRecon(filename);
+        return reduce( simple ).get(0) ; 
     }
 
     /*
@@ -22,11 +22,11 @@ public class ReconRegex{
 
             while(pos < toRecon.size()){
 
-                this.melt(toRecon,size,pos);
-                this.melt(toRecon,size,pos+1);
+                melt(toRecon,size,pos);
+                melt(toRecon,size,pos+1);
 
-                while( this.fusion(toRecon,pos) )
-                    this.melt(toRecon,size,pos+1);
+                while( fusion(toRecon,pos) )
+                    melt(toRecon,size,pos+1);
 
                 pos++;
             }
@@ -34,6 +34,7 @@ public class ReconRegex{
             pos = 0;
             size++; 
         }
+        return toRecon;
     }
 
     /*
@@ -41,8 +42,12 @@ public class ReconRegex{
      */
     private static boolean fusion(ArrayList<String> toRecon, int start){
         boolean result = false ;
-        while( start < toRecon.size()-1 && this.isEquals(toRecon.get(start),toRecon.get(start+1)) )
+        int eq = 0 ;
+        while( start < (toRecon.size()-1) && (eq = isEquals(toRecon.get(start),toRecon.get(start+1))) > 0 ){
+            if( eq == 2 ) toRecon.set(start,"("+toRecon.get(start)+")+");
+            toRecon.remove(start+1);
             result = true ; 
+        }
         return result;
     }
 
@@ -62,7 +67,7 @@ public class ReconRegex{
      */
     private static void melt(ArrayList<String> toRecon, int size, int start){
         int cpt = 0 ;
-        while( cpt < size && this.melting(toRecon,start) )
+        while( cpt < size && melting(toRecon,start) )
             cpt++ ;
     }
 
@@ -82,8 +87,8 @@ public class ReconRegex{
         String[] buffer = filename.split("");
         ArrayList<String> result = new ArrayList<String>();
         for(String c : buffer){
-            String r = this.getLetterRegex(c);
-            if( result.size > 0 && result.get( result.size() - 1 ).equals(r) && result.get( result.size()-1 ).matches(r+"+$") == false )  
+            String r = getLetterRegex(c);
+            if( result.size() > 0 && result.get( result.size() - 1 ).equals(r) && result.get( result.size()-1 ).matches(r+"+$") == false )  
                 result.set( result.size()-1, r+"+" );
         }
         return result;
